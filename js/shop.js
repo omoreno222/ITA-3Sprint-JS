@@ -104,6 +104,7 @@ function cleanCart() {
  Using the "cartlist" array that contains all the items in the shopping cart, 
  generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.*/
  function generateCart(cartList) {
+        cart=[];
         for (let i =0; i<cartList.length; i++) {
             let target = cart.find( element =>  element.id === cartList[i].id );
 
@@ -119,7 +120,7 @@ function cleanCart() {
                 cartList[i].subtotalWithDiscount = "not defined yet"; 
             } 
         }
-
+        //testing
         console.log("Sin descuentos promocionales")
         console.table(cart);
         console.log("A continuación con descuentos promocionales");
@@ -135,17 +136,42 @@ function applyPromotionsCart(cart) {
             cart[i].subtotalWithDiscount = 10;
         } else if (cart[i].id === 3 && cart[i].quantity >= 10) {
             cart[i].subtotalWithDiscount = cart[i].price*cart[i].quantity*0.66666667;
+        } else {
+            cart[i].subtotalWithDiscount=cart[i].price*cart[i].quantity;
         }
     } // console.log para probar en la función generate cart.
 }
 
 // Exercise 6
+// Fill the shopping cart modal manipulating the shopping cart dom
 function printCart() {
-    // Fill the shopping cart modal manipulating the shopping cart dom
+    generateCart(cartList);
+    
+    let printProducts ="";
+    for (let i=0; i<cart.length; i++) {
+        printProducts += "<tr>";
+        printProducts += "<th>" + cart[i].name + "</th>";
+        printProducts += "<td>" + cart[i].price.toFixed(2) + "</td>";
+        printProducts += "<td>" + cart[i].quantity.toFixed(2) + "</td>";
+        printProducts += "<td>" + cart[i].subtotalWithDiscount.toFixed(2) + "</td>";
+        printProducts += "</tr>";
+    }
+
+    document.getElementById("cart_list").innerHTML=printProducts;
+
+    let grandTotal = 0;
+    for (let i=0; i<cart.length; i++) {
+        grandTotal += cart[i].subtotalWithDiscount;
+    }
+
+    document.getElementById("total_price").innerHTML=grandTotal.toFixed(2);
+
+
+
 }
 
 
-// ** Nivell II **
+
 
 // Exercise 7
 function addToCart(id) {
@@ -153,6 +179,8 @@ function addToCart(id) {
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cart array or update its quantity in case it has been added previously.
 }
+
+// ** Nivell II **
 
 // Exercise 8
 function removeFromCart(id) {
