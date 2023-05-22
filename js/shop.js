@@ -120,12 +120,23 @@ function cleanCart() {
             } 
         }
 
-    console.table(cart);
+        console.log("Sin descuentos promocionales")
+        console.table(cart);
+        console.log("A continuación con descuentos promocionales");
+        applyPromotionsCart(cart);
+        console.table(cart);
 } 
 
 // Exercise 5
-function applyPromotionsCart() {
-    // Apply promotions to each item in the array "cart"
+// Apply promotions to each item in the array "cart"
+function applyPromotionsCart(cart) {
+    for (let i=0; i<cart.length;i++) {
+        if (cart[i].id === 1 && cart[i].quantity >= 3) {
+            cart[i].subtotalWithDiscount = 10;
+        } else if (cart[i].id === 3 && cart[i].quantity >= 10) {
+            cart[i].subtotalWithDiscount = cart[i].price*cart[i].quantity*0.66666667;
+        }
+    } // console.log para probar en la función generate cart.
 }
 
 // Exercise 6
