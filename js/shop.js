@@ -81,6 +81,7 @@ function buy(id) {
             cartList.push(products[i]);
             i=products.length;
         }
+        document.getElementById("count_product").innerHTML=cartList.length;
     }
     console.table(cartList);
 }
@@ -103,7 +104,7 @@ function cleanCart() {
 /*Exercise 4
  Using the "cartlist" array that contains all the items in the shopping cart, 
  generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.*/
- function generateCart(cartList) {
+ function generateCart() {
         cart=[];
         for (let i =0; i<cartList.length; i++) {
             let target = cart.find( element =>  element.id === cartList[i].id );
@@ -130,7 +131,7 @@ function cleanCart() {
 
 // Exercise 5
 // Apply promotions to each item in the array "cart"
-function applyPromotionsCart(cart) {
+function applyPromotionsCart() {
     for (let i=0; i<cart.length;i++) {
         if (cart[i].id === 1 && cart[i].quantity >= 3) {
             cart[i].subtotalWithDiscount = 10;
