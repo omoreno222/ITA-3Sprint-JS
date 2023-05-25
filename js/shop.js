@@ -104,7 +104,7 @@ var products = [
  /*Exercise 4
   Using the "cartlist" array that contains all the items in the shopping cart, 
   generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.*/
-  function generateCart() {
+  /* function generateCart() {
          cart=[];
          for (let i =0; i<cartList.length; i++) {
              let target = cart.find( element =>  element.id === cartList[i].id );
@@ -127,7 +127,7 @@ var products = [
          console.log("A continuación con descuentos promocionales");
          applyPromotionsCart(cart);
          console.table(cart);
- } 
+    } */ 
  
  // Exercise 5
  // Apply promotions to each item in the array "cart"
@@ -147,7 +147,6 @@ var products = [
  // Exercise 6
  // Fill the shopping cart modal manipulating the shopping cart dom
  function printCart() {
-     generateCart(cartList);
      
      let printProducts ="";
      for (let i=0; i<cart.length; i++) {
@@ -167,24 +166,24 @@ var products = [
      }
  
      document.getElementById("total_price").innerHTML=grandTotal.toFixed(2);
- 
- 
- 
  }
- 
- 
- 
  
  // Exercise 7
   // Refactor previous code in order to simplify it 
      // 1. Loop for to the array products to get the item to add to cart
      // 2. Add found product to the cart array or update its quantity in case it has been added previously.
-function addToCart(id) {
+    productCounter = 0;
+
+     function addToCart(id) {
 
     // busco id en cart
         // si no está añado (product[id] en cart) con cantidad y subtotal
         // si sí está aumento cantidad de id en 1
     
+    let prodCounter =0;
+    
+
+
     let choosen = products.find(element => element.id === id);
     // ya sé si está en producto o no y tengo el índice o -1 si no lo encuentra
     // es un objeto
@@ -199,19 +198,22 @@ function addToCart(id) {
         newItem.quantity=1;
         /* newItem.subtotal=newItem.quantity*newItem.price; */
         newItem.subtotalWithDiscount=0;
+        
     } else {
         let existingItem=cart[target]
-        existingItem.quantity++;
+        existingItem.quantity++;        
         /* existingItem.subtotal=existingItem.quantity*existingItem.price; */
         // subTotal ya creado antes en el if 
     } 
-
-    
-    applyPromotionsCart();
-
-    console.log("fudck");
+    applyPromotionsCart();    
     console.table(cart);
 
+
+    let totQuantity =0;
+    for (let i = 0; i<cart.length; i++) {
+        totQuantity += cart[i].quantity;
+    }
+    document.getElementById("count_product").innerHTML=totQuantity;
 
 }
  
