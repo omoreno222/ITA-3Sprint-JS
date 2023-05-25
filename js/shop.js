@@ -154,7 +154,7 @@ var products = [
          printProducts += "<td>" + cart[i].price.toFixed(2) + "</td>";
          printProducts += "<td>" + cart[i].quantity.toFixed(2) + "</td>";
          printProducts += "<td>" + cart[i].subtotalWithDiscount.toFixed(2) + "</td>";
-         printProducts += "<td>" + "<button class='btn btn-primary' onclick='removeFromCart("+cart[i].id+")'>-</button>" + "</td>";
+         printProducts += "<td>" + "<button class='btn btn-danger' onclick='removeFromCart("+cart[i].id+")'>-</button>" + "</td>";
          printProducts += "</tr>";
      }
  

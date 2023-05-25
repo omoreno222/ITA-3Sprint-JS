@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 /*!
 * Start Bootstrap - Shop Homepage v5.0.4 (https://startbootstrap.com/template/shop-homepage)
 * Copyright 2013-2021 Start Bootstrap
@@ -78,7 +79,7 @@
 
 body {
   margin: 0;
-  font-family: var(--bs-body-font-family);
+  font-family: Raleway;
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
   line-height: var(--bs-body-line-height);
@@ -102,6 +103,7 @@ hr:not([size]) {
 }
 
 h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
+  font-family: 'Raleway', sans-serif;
   margin-top: 0;
   margin-bottom: 0.5rem;
   font-weight: 500;
@@ -153,6 +155,9 @@ h6, .h6 {
 }
 
 p {
+
+  font-family: 'Roboto', sans-serif;
+  color: orange;
   margin-top: 0;
   margin-bottom: 1rem;
 }
