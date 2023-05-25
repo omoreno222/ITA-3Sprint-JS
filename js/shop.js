@@ -134,8 +134,7 @@ var products = [
  function applyPromotionsCart() {
      for (let i=0; i<cart.length;i++) {
          if (cart[i].id === 1 && cart[i].quantity >= 3) {
-            cart[i].price=10; 
-            cart[i].subtotalWithDiscount = cart[i].price*cart[i].quantity;
+            cart[i].subtotalWithDiscount = (cart[i].price-0.5)*cart[i].quantity;
          } else if (cart[i].id === 3 && cart[i].quantity >= 10) {
              cart[i].subtotalWithDiscount = cart[i].price*cart[i].quantity*0.66666667;
          } else {
@@ -155,6 +154,7 @@ var products = [
          printProducts += "<td>" + cart[i].price.toFixed(2) + "</td>";
          printProducts += "<td>" + cart[i].quantity.toFixed(2) + "</td>";
          printProducts += "<td>" + cart[i].subtotalWithDiscount.toFixed(2) + "</td>";
+         printProducts += "<td>" + "<button class='btn btn-primary' onclick='removeFromCart("+cart[i].id+")'>-</button>" + "</td>";
          printProducts += "</tr>";
      }
  
@@ -167,63 +167,55 @@ var products = [
  
      document.getElementById("total_price").innerHTML=grandTotal.toFixed(2);
  }
+
+ // ** Nivell II **
  
- // Exercise 7
+ // Exercise 8
   // Refactor previous code in order to simplify it 
      // 1. Loop for to the array products to get the item to add to cart
      // 2. Add found product to the cart array or update its quantity in case it has been added previously.
-    productCounter = 0;
-
-     function addToCart(id) {
-
-    // busco id en cart
-        // si no está añado (product[id] en cart) con cantidad y subtotal
-        // si sí está aumento cantidad de id en 1
     
-    let prodCounter =0;
-    
-
-
-    let choosen = products.find(element => element.id === id);
-    // ya sé si está en producto o no y tengo el índice o -1 si no lo encuentra
-    // es un objeto
-
-    let target = cart.findIndex (element => element.id ===  choosen.id);
-    // el id de productes está a cart o no
-    //n es un indice
-
-    if (target === -1) {
-        cart.push(choosen);
-        let newItem = cart[cart.length-1];
-        newItem.quantity=1;
-        /* newItem.subtotal=newItem.quantity*newItem.price; */
-        newItem.subtotalWithDiscount=0;
-        
-    } else {
-        let existingItem=cart[target]
-        existingItem.quantity++;        
-        /* existingItem.subtotal=existingItem.quantity*existingItem.price; */
-        // subTotal ya creado antes en el if 
-    } 
-    applyPromotionsCart();    
-    console.table(cart);
-
-
+function pillUpdate() {
     let totQuantity =0;
     for (let i = 0; i<cart.length; i++) {
         totQuantity += cart[i].quantity;
     }
     document.getElementById("count_product").innerHTML=totQuantity;
+}
 
+function addToCart(id) {
+let choosen = products.find(element => element.id === id); // devuelve objeto
+let target = cart.findIndex (element => element.id ===  choosen.id); // devuelve index
+
+if (target === -1) {
+    cart.push(choosen);
+    let newItem = cart[cart.length-1];
+    newItem.quantity=1;
+    newItem.subtotalWithDiscount=0;
+} else {
+    let existingItem=cart[target]
+    existingItem.quantity++;        
+} 
+applyPromotionsCart();    
+console.table(cart);
+pillUpdate();
+
+    
 }
  
- // ** Nivell II **
- 
- // Exercise 8
- function removeFromCart(id) {
-     // 1. Loop for to the array products to get the item to add to cart
-     // 2. Add found product to the cartList array
- }
+// Exercise 9
+function removeFromCart(id) {
+    let target = cart.findIndex (element => element.id ===  id);
+    if (cart[target].quantity === 1) {
+        cart.splice(target,1);
+        printCart();
+        } else {
+        cart[target].quantity--;
+        applyPromotionsCart();
+        printCart();
+        }
+    pillUpdate();
+}
  
  function open_modal(){
      console.log("Open Modal");
